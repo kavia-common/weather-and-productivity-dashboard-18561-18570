@@ -1,82 +1,79 @@
-# Lightweight React Template for KAVIA
+# Weather & Productivity Dashboard (Ocean Professional)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern React dashboard that shows current weather and a 7-day forecast powered by OpenWeatherMap, plus a placeholder Jira visualization panel. Styled with the Ocean Professional theme (blue + amber accents) using CSS variables and utility-like classes.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Current weather and 7-day forecast (OpenWeatherMap)
+- Location via browser geolocation with fallback to city search
+- Units toggle (°C/°F) and preference persistence (localStorage)
+- Jira panel mock with Recharts (issues by status and weekly activity)
+- Responsive dashboard layout with top navbar, left sidebar, and central panels
+- Ocean Professional theme: subtle shadows, rounded corners, gradients, and accessible UI
 
-## Getting Started
+## Prerequisites
 
-In the project directory, you can run:
+- Node.js 16+ recommended
+- An OpenWeatherMap API key
 
-### `npm start`
+## Setup
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Install dependencies:
+   ```
+   npm install
+   ```
 
-### `npm test`
+2. Create your environment file:
+   ```
+   cp .env.example .env
+   ```
+   Edit `.env` and set:
+   - `REACT_APP_OWM_API_KEY` (required)
+   - `REACT_APP_OWM_API_BASE` (optional; defaults to https://api.openweathermap.org)
 
-Launches the test runner in interactive watch mode.
+3. Start the app (port 3000):
+   ```
+   npm start
+   ```
+   Open http://localhost:3000
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `src/components/Navbar.jsx` — Top navigation with gradient title
+- `src/components/Sidebar.jsx` — City search, units toggle
+- `src/components/Weather/WeatherPanel.jsx` — Current weather and forecast
+- `src/components/Weather/ForecastCard.jsx` — Forecast day card
+- `src/components/JiraPanel.jsx` — Mock charts using Recharts
+- `src/services/weatherApi.js` — Service layer for OpenWeatherMap calls
+- `src/hooks/useWeather.js` — State, geolocation, fetching, persistence
+- `src/theme/theme.css` — Ocean Professional theme and utilities
+- `src/utils/format.js` — Formatting helpers
 
-## Customization
+## Environment Variables
 
-### Colors
+See `.env.example` for details:
+- `REACT_APP_OWM_API_KEY` — your OpenWeatherMap API key
+- `REACT_APP_OWM_API_BASE` — API base URL (optional)
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+## Accessibility
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+- Semantic elements, aria labels for forms and dynamic content
+- Focus styles on inputs and buttons
+- Reduced motion friendly design
 
-### Components
+## Future Jira Integration
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+The Jira panel currently uses mock data. For real integration:
+- Implement OAuth 2.0 (3LO) with Jira
+- Retrieve issues via the Jira REST Search API
+- Never store secrets in the frontend; use a secure backend
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+## Scripts
 
-## Learn More
+- `npm start` — dev server at port 3000
+- `npm test` — run unit tests
+- `npm run build` — production build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT
